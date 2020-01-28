@@ -22,10 +22,13 @@ import {
   Button,
   Card,
   CardHeader,
+  CardBody,
   Table,
   Container,
   Row,
-  Col
+  Col,
+  FormGroup,
+  Input
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.jsx";
@@ -137,6 +140,23 @@ class Grades extends React.Component {
                     </tr>
                   </tbody>
                 </Table>
+                <CardBody className="bg-secondary">
+                  <Row>
+                    <Col md="6">
+                      <FormGroup>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-grade"
+                          placeholder="Grade"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md="6">
+                      <Button color="primary">Add new Grade</Button>
+                    </Col>
+                  </Row>
+                </CardBody>
               </Card>
             </Col>
           </Row>

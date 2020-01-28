@@ -6,16 +6,17 @@ export const userService = {
   logout,
   register,
   getAll,
+  getAllTeachers,
   getById,
   update,
   delete: _delete
 };
 
-function login(username, password) {
+function login(email, password) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ email, password })
   };
 
   return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
@@ -40,6 +41,28 @@ function getAll() {
   };
 
   return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+}
+
+function getAllTeachers() {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(`${config.apiUrl}/users/teachers`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function getAllStudents() {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(`${config.apiUrl}/users/students`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function getById(id) {

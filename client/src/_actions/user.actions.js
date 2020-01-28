@@ -8,17 +8,34 @@ export const userActions = {
   logout,
   register,
   getAll,
+  getAllTeachers,
+  getAllStudents,
   delete: _delete
 };
 
-function login(username, password) {
+function login(email, password) {
   return dispatch => {
-    dispatch(request({ username }));
+    dispatch(request({ email }));
 
-    userService.login(username, password).then(
+    userService.login(email, password).then(
       user => {
         dispatch(success(user));
-        history.push("/");
+        switch (user.role) {
+          case "admin":
+            history.push("/admin/teachers");
+            window.location.reload();
+            break;
+          case "teacher":
+            history.push("/teacher/profile");
+            window.location.reload();
+            break;
+          case "student":
+            history.push("/student/profile");
+            window.location.reload();
+            break;
+          default:
+            break;
+        }
       },
       error => {
         dispatch(failure(error.toString()));
@@ -91,6 +108,52 @@ function getAll() {
   }
   function failure(error) {
     return { type: userConstants.GETALL_FAILURE, error };
+  }
+}
+
+function getAllTeachers() {
+  return dispatch => {
+    dispatch(request());
+
+    userService
+      .getAllTeachers()
+      .then(
+        users => dispatch(success(users)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: userConstants.GETALL_TEACHERS_REQUEST };
+  }
+  function success(users) {
+    return { type: userConstants.GETALL_TEACHERS_SUCCESS, users };
+  }
+  function failure(error) {
+    return { type: userConstants.GETALL_TEACHERS_FAILURE, error };
+  }
+}
+
+function getAllStudents() {
+  return dispatch => {
+    dispatch(request());
+
+    userService
+      .getAllStudents()
+      .then(
+        users => dispatch(success(users)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: userConstants.GETALL_STUDENTS_REQUEST };
+  }
+  function success(users) {
+    return { type: userConstants.GETALL_STUDENTS_SUCCESS, users };
+  }
+  function failure(error) {
+    return { type: userConstants.GETALL_STUDENTS_FAILURE, error };
   }
 }
 

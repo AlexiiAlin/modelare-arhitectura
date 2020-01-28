@@ -6,12 +6,11 @@ const userService = require("./user.service");
 router.post("/authenticate", authenticate);
 router.post("/register", register);
 router.get("/", getAll);
+router.get("/teachers", getAllTeachers);
 router.get("/current", getCurrent);
 router.get("/:id", getById);
 router.put("/:id", update);
 router.delete("/:id", _delete);
-
-module.exports = router;
 
 function authenticate(req, res, next) {
   userService
@@ -19,7 +18,7 @@ function authenticate(req, res, next) {
     .then(user =>
       user
         ? res.json(user)
-        : res.status(400).json({ message: "Username or password is incorrect" })
+        : res.status(400).json({ message: "Email or password is incorrect" })
     )
     .catch(err => next(err));
 }
@@ -34,6 +33,13 @@ function register(req, res, next) {
 function getAll(req, res, next) {
   userService
     .getAll()
+    .then(users => res.json(users))
+    .catch(err => next(err));
+}
+
+function getAllTeachers(req, res, next) {
+  userService
+    .getAllTeachers()
     .then(users => res.json(users))
     .catch(err => next(err));
 }
@@ -65,3 +71,5 @@ function _delete(req, res, next) {
     .then(() => res.json({}))
     .catch(err => next(err));
 }
+
+module.exports = router;

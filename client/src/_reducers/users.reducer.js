@@ -2,6 +2,34 @@ import { userConstants } from "../_constants";
 
 export function users(state = {}, action) {
   switch (action.type) {
+    // START TEACHER
+    case userConstants.GETALL_TEACHERS_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.GETALL_TEACHERS_SUCCESS:
+      return {
+        items: action.users
+      };
+    case userConstants.GETALL_TEACHERS_FAILURE:
+      return {
+        error: action.error
+      };
+    // STOP TEACHER
+    // START STUDENT
+    case userConstants.GETALL_STUDENTS_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.GETALL_STUDENTS_SUCCESS:
+      return {
+        items: action.users
+      };
+    case userConstants.GETALL_STUDENTS_FAILURE:
+      return {
+        error: action.error
+      };
+    // STOP STUDENT
     case userConstants.GETALL_REQUEST:
       return {
         loading: true

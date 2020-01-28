@@ -7,14 +7,15 @@ const User = db.User;
 module.exports = {
   authenticate,
   getAll,
+  getAllTeachers,
   getById,
   create,
   update,
   delete: _delete
 };
 
-async function authenticate({ username, password }) {
-  const user = await User.findOne({ username });
+async function authenticate({ email, password }) {
+  const user = await User.findOne({ email });
   if (user && bcrypt.compareSync(password, user.hash)) {
     const { hash, ...userWithoutHash } = user.toObject();
     const token = jwt.sign({ sub: user.id }, config.secret);
@@ -29,14 +30,18 @@ async function getAll() {
   return await User.find().select("-hash");
 }
 
+async function getAllTeachers() {
+  return await User.find({ role: "teacher" });
+}
+
 async function getById(id) {
   return await User.findById(id).select("-hash");
 }
 
 async function create(userParam) {
   // validate
-  if (await User.findOne({ username: userParam.username })) {
-    throw 'Username "' + userParam.username + '" is already taken';
+  if (await User.findOne({ email: userParam.email })) {
+    throw 'Email "' + userParam.email + '" is already taken';
   }
 
   const user = new User(userParam);
@@ -56,10 +61,10 @@ async function update(id, userParam) {
   // validate
   if (!user) throw "User not found";
   if (
-    user.username !== userParam.username &&
-    (await User.findOne({ username: userParam.username }))
+    user.email !== userParam.email &&
+    (await User.findOne({ email: userParam.email }))
   ) {
-    throw 'Username "' + userParam.username + '" is already taken';
+    throw 'Email "' + userParam.email + '" is already taken';
   }
 
   // hash password if it was entered
