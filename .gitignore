@@ -29,6 +29,8 @@ build/Release
 # Dependency directories
 server/node_modules
 client/node_modules
+argon-dashboard-react/node_modules
+argon-dashboard-react/package-lock.json
 jspm_packages
 typings
 
