@@ -21,15 +21,15 @@ function login(email, password) {
       user => {
         dispatch(success(user));
         switch (user.role) {
-          case "admin":
+          case 3:
             history.push("/admin/teachers");
             window.location.reload();
             break;
-          case "teacher":
+          case 2:
             history.push("/teacher/profile");
             window.location.reload();
             break;
-          case "student":
+          case 1:
             history.push("/student/profile");
             window.location.reload();
             break;
