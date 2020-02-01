@@ -29,11 +29,11 @@ class Teachers extends React.Component {
     const { page, noOfRows } = this.state;
     let start = noOfRows * (page - 1) + 1;
     let end = page * noOfRows;
-    console.log(start,end);
+    console.log(start, end);
     return (
       teachers &&
       teachers.map((prop, key) => {
-        if(key + 1 < start || key + 1 > end){
+        if (key + 1 < start || key + 1 > end) {
           return;
         }
         return (
