@@ -7,6 +7,7 @@ router.post("/authenticate", authenticate);
 router.post("/register", register);
 router.get("/", getAll);
 router.get("/teachers", getAllTeachers);
+router.post("/teachers", createTeacher);
 router.get("/current", getCurrent);
 router.get("/:id", getById);
 router.put("/:id", update);
@@ -26,6 +27,13 @@ function authenticate(req, res, next) {
 function register(req, res, next) {
   userService
     .create(req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
+}
+
+function createTeacher(req, res, next) {
+  userService
+    .createTeacher(req.body)
     .then(() => res.json({}))
     .catch(err => next(err));
 }

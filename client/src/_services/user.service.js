@@ -4,9 +4,9 @@ import { authHeader } from "../_helpers";
 export const userService = {
   login,
   logout,
-  register,
   getAll,
   getAllTeachers,
+  createTeacher,
   getById,
   update,
   delete: _delete
@@ -84,6 +84,18 @@ function register(user) {
   };
 
   return fetch(`${config.apiUrl}/users/register`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function createTeacher(user) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify(user)
+  };
+  console.log(requestOptions);
+  return fetch(`${config.apiUrl}/users/teachers`, requestOptions).then(
     handleResponse
   );
 }

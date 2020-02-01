@@ -8,6 +8,7 @@ module.exports = {
   authenticate,
   getAll,
   getAllTeachers,
+  createTeacher,
   getById,
   create,
   update,
@@ -32,6 +33,25 @@ async function getAll() {
 
 async function getAllTeachers() {
   return await User.find({ role: 2 });
+}
+
+async function createTeacher(userParam) {
+  // validate
+  if (await User.findOne({ email: userParam.email })) {
+    throw 'Email "' + userParam.email + '" is already taken';
+  }
+
+  const user = new User(userParam);
+
+  // hash password
+  // if (userParam.password) {
+  //   user.hash = bcrypt.hashSync(userParam.password, 10);
+  // }
+  user.hash = bcrypt.hashSync("userParam.password", 10);
+  user.role = 2;
+
+  // save user
+  await user.save();
 }
 
 async function getById(id) {

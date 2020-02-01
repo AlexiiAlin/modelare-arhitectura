@@ -7,7 +7,7 @@ const schema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   createdDate: { type: Date, default: Date.now, required: true },
-  role: { type: Number, default: 0, enume: [0, 1, 2, 3] }, // We'll consider: 0 = Unconfirmed, 1 = Student, 2 = Teacher, 3 = Admin
+  role: { type: Number, default: 0, enum: [0, 1, 2, 3] }, // We'll consider: 0 = Unconfirmed, 1 = Student, 2 = Teacher, 3 = Admin
   class: {
     // student-related
     type: mongoose.Schema.Types.ObjectId,

@@ -15,6 +15,12 @@ export function users(state = {}, action) {
       return {
         error: action.error
       };
+    case userConstants.CREATE_TEACHER_REQUEST:
+      return { registering: true, teacher: action.user, ...state };
+    case userConstants.CREATE_TEACHER_SUCCESS:
+      return state;
+    case userConstants.CREATE_TEACHER_FAILURE:
+      return state;
     // STOP TEACHER
     // START STUDENT
     case userConstants.GETALL_STUDENTS_REQUEST:

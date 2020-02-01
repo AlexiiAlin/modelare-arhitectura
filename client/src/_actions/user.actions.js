@@ -6,9 +6,9 @@ import { history } from "../_helpers";
 export const userActions = {
   login,
   logout,
-  register,
   getAll,
   getAllTeachers,
+  createTeacher,
   getAllStudents,
   delete: _delete
 };
@@ -85,6 +85,36 @@ function register(user) {
   }
   function failure(error) {
     return { type: userConstants.REGISTER_FAILURE, error };
+  }
+}
+
+function createTeacher(teacher) {
+  return dispatch => {
+    dispatch(request(teacher));
+
+    userService.createTeacher(teacher).then(
+      user => {
+        console.log("user");
+        // dispatch(success());
+        // history.push("/admin/teacher/:id");
+        // dispatch(alertActions.success("Teacher created successfully"));
+      },
+      error => {
+        console.log("error");
+        // dispatch(failure(error.toString()));
+        // dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(teacher) {
+    return { type: userConstants.CREATE_TEACHER_REQUEST, teacher };
+  }
+  function success(teacher) {
+    return { type: userConstants.CREATE_TEACHER_SUCCESS, teacher };
+  }
+  function failure(error) {
+    return { type: userConstants.CREATE_TEACHER_FAILURE, error };
   }
 }
 
