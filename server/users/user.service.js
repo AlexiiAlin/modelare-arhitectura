@@ -31,7 +31,7 @@ async function getAll() {
 }
 
 async function getAllTeachers() {
-  return await User.find({ role: "teacher" });
+  return await User.find({ role: 2 });
 }
 
 async function getById(id) {
