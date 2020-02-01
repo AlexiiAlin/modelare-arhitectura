@@ -70,7 +70,7 @@ class Login extends React.Component {
               )}
               <Form role="form" onSubmit={this.handleSubmit}>
                 <FormGroup
-                  className={"mb-3" + (submitted && !email ? " has-error" : "")}
+                  className={"mb-3" + (submitted && !email ? "has-danger" : "")}
                 >
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
@@ -88,7 +88,7 @@ class Login extends React.Component {
                   </InputGroup>
                 </FormGroup>
                 <FormGroup
-                  className={submitted && !password ? "has-error" : ""}
+                  className={submitted && !password ? "has-danger" : ""}
                 >
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
