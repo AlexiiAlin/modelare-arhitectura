@@ -42,6 +42,7 @@ async function getClass(id) {
   const classObj = await Class.findById(id);
   const newClass = {
     name: classObj.name,
+    id: classObj._id,
     students: classObj.students.map((prop, key) => {
       return {
         id: prop._id,
