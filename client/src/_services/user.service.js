@@ -4,8 +4,8 @@ import { authHeader } from "../_helpers";
 export const userService = {
   login,
   logout,
-  getAll,
   getAllTeachers,
+  getTeacher,
   createTeacher,
   getById,
   update,
@@ -34,15 +34,6 @@ function logout() {
   localStorage.removeItem("user");
 }
 
-function getAll() {
-  const requestOptions = {
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-}
-
 function getAllTeachers() {
   const requestOptions = {
     method: "GET",
@@ -50,6 +41,17 @@ function getAllTeachers() {
   };
 
   return fetch(`${config.apiUrl}/users/teachers`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function getTeacher(id) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(`${config.apiUrl}/users/teacher/${id}`, requestOptions).then(
     handleResponse
   );
 }
