@@ -5,7 +5,8 @@ const db = require("_helpers/db");
 const Class = db.Class;
 
 module.exports = {
-  getAllClasses
+  getAllClasses,
+  createClass
 };
 
 async function getAllClasses() {
@@ -21,4 +22,17 @@ async function getAllClasses() {
     return newProp;
   });
   return classes;
+}
+
+async function createClass(classObj) {
+  // validate
+  if (await Class.findOne({ name: classObj.name })) {
+    throw 'Class "' + classObj.name + '" allready exists';
+  }
+
+  const newClass = new Class(classObj);
+
+  // save user
+  await newClass.save();
+  return newClass;
 }
