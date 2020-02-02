@@ -41,12 +41,14 @@ export function classes(state = {}, action) {
       };
     case classConstants.ADD_STUDENT_IN_CLASS_REQUEST:
       return {
+        ...state,
         loading: true
       };
     case classConstants.ADD_STUDENT_IN_CLASS_SUCCESS:
       return state;
     case classConstants.ADD_STUDENT_IN_CLASS_FAILURE:
       return {
+        ...state,
         error: action.error
       };
     default:

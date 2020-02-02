@@ -91,7 +91,7 @@ function addNewStudent(id, email) {
       .addNewStudent(id, email)
       .then(
         () => dispatch(success()),
-        error => dispatch(failure(error.toString()))
+        error => {dispatch(failure(error.toString()));dispatch(alertActions.error(error.toString()));}
       );
   };
 
