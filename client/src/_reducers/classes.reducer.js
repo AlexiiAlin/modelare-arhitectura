@@ -20,7 +20,11 @@ export function classes(state = {}, action) {
         registering: true
       };
     case classConstants.CREATE_CLASS_SUCCESS:
-      return state;
+      return {
+        ...state,
+        registered: true,
+        newClass: action.class
+      };
     case classConstants.CREATE_CLASS_FAILURE:
       return state;
     default:
