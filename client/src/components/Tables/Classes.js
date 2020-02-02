@@ -38,13 +38,16 @@ class Classes extends React.Component {
         return (
           <tr key={key}>
             <td>{key + 1}</td>
-            <td>{classes.name}</td>
-            <td>{classes.noStudents}</td>
-            <td>{classes.noTeachers}</td>
-            <td>{classes.noSubjects}</td>
+            <td>{prop.className}</td>
+            <td>{prop.noStudents}</td>
+            <td>{prop.noTeachers}</td>
+            <td>{prop.noSubjects}</td>
             <td className="text-right">
-              <Link to={"/admin/class/" + prop.id}>
-                <Button color="default">Edit Teacher</Button>
+              <Link
+                to={"/admin/class/" + prop.id}
+                className="text-white font-weight-bold h4"
+              >
+                Manage class
               </Link>
             </td>
           </tr>
