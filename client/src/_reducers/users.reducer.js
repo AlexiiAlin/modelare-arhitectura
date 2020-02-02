@@ -16,11 +16,25 @@ export function users(state = {}, action) {
         error: action.error
       };
     case userConstants.CREATE_TEACHER_REQUEST:
-      return { registering: true };
+      return {
+        registering: true
+      };
     case userConstants.CREATE_TEACHER_SUCCESS:
       return state;
     case userConstants.CREATE_TEACHER_FAILURE:
       return state;
+    case userConstants.GET_TEACHER_REQUEST:
+      return {
+        loading: true
+      };
+    case userConstants.GET_TEACHER_SUCCESS:
+      return {
+        teacher: action.teacher
+      };
+    case userConstants.GET_TEACHER_FAILURE:
+      return {
+        error: action.error
+      };
     // STOP TEACHER
     // START STUDENT
     case userConstants.GETALL_STUDENTS_REQUEST:
