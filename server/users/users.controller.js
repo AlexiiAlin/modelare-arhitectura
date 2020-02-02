@@ -8,6 +8,7 @@ router.post("/register", register);
 router.get("/", getAll);
 router.get("/teachers", getAllTeachers);
 router.post("/teachers", createTeacher);
+router.get("/teacher/:id", getTeacher);
 router.get("/current", getCurrent);
 router.get("/:id", getById);
 router.put("/:id", update);
@@ -35,6 +36,13 @@ function createTeacher(req, res, next) {
   userService
     .createTeacher(req.body)
     .then(user => res.json(user))
+    .catch(err => next(err));
+}
+
+function getTeacher(req, res, next) {
+  userService
+    .getTeacher(req.params.id)
+    .then(user => (user ? res.json(user) : res.sendStatus(404)))
     .catch(err => next(err));
 }
 
