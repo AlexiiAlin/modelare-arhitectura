@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 // reactstrap components
 import {
@@ -54,8 +55,11 @@ class Classes extends React.Component {
     }
   };
   render() {
-    const { classes, alert, registering } = this.props;
+    const { classes, alert, registering, registered, newClass } = this.props;
     const { classObj, submitted } = this.state;
+    if (registered && newClass) {
+      return <Redirect to={"/admin/class/" + newClass._id} />;
+    }
     return (
       <>
         <Header />
@@ -112,8 +116,8 @@ class Classes extends React.Component {
 
 function mapState(state) {
   const { classes, alert } = state;
-  const { registering } = state.classes;
-  return { classes, alert };
+  const { registering, registered, newClass } = state.classes;
+  return { classes, alert, registering, registered, newClass };
 }
 
 const actionCreators = {
