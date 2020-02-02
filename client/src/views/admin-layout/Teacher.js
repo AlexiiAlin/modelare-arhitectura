@@ -21,8 +21,6 @@ import Table from "components/Tables/TeacherTeaching.js";
 
 import { userActions, alertActions } from "_actions";
 
-import { history } from "_helpers";
-
 class Teacher extends React.Component {
   constructor(props) {
     super(props);
