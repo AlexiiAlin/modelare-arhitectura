@@ -35,7 +35,7 @@ class ClassDetails extends React.Component {
         return (
           <tr key={key}>
             <td>
-              {students.firstName} {students.lastName}
+              {prop.firstName} {prop.lastName}
             </td>
             <td className="text-right">
               <Button color="danger" size="sm">
