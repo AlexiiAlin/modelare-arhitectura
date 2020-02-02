@@ -37,9 +37,7 @@ function createClass(newClass) {
 
     classService.createClass(newClass).then(
       newClass => {
-        dispatch(success());
-        history.push("/admin/class/" + newClass._id);
-        window.location.reload();
+        dispatch(success(newClass));
         dispatch(alertActions.success("Class created successfully"));
       },
       error => {
@@ -52,7 +50,7 @@ function createClass(newClass) {
   function request(newClass) {
     return { type: classConstants.CREATE_CLASS_REQUEST, class: newClass };
   }
-  function success(teacher) {
+  function success(newClass) {
     return { type: classConstants.CREATE_CLASS_SUCCESS, class: newClass };
   }
   function failure(error) {
