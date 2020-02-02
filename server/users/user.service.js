@@ -52,6 +52,7 @@ async function createTeacher(userParam) {
 
   // save user
   await user.save();
+  return user;
 }
 
 async function getById(id) {
