@@ -14,6 +14,15 @@ export function classes(state = {}, action) {
       return {
         error: action.error
       };
+    case classConstants.CREATE_CLASS_REQUEST:
+      return {
+        ...state,
+        registering: true
+      };
+    case classConstants.CREATE_CLASS_SUCCESS:
+      return state;
+    case classConstants.CREATE_CLASS_FAILURE:
+      return state;
     default:
       return state;
   }
