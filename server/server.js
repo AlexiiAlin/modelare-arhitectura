@@ -19,6 +19,7 @@ app.use(jwt());
 
 // api routes
 app.use("/users", require("./users/users.controller"));
+app.use("/classes", require("./classes/classes.controller"));
 app.use(
   "/db-initializer",
   require("./db-initializer/db-initializer.controller")
