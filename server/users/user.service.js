@@ -10,6 +10,7 @@ module.exports = {
   getAllTeachers,
   createTeacher,
   getTeacher,
+  updateTeacher,
   getById,
   create,
   update,
@@ -106,6 +107,25 @@ async function update(id, userParam) {
   // hash password if it was entered
   if (userParam.password) {
     userParam.hash = bcrypt.hashSync(userParam.password, 10);
+  }
+
+  // copy userParam properties to user
+  Object.assign(user, userParam);
+
+  await user.save();
+}
+
+async function updateTeacher(id, userParam) {
+  const user = await User.findById(id);
+
+  // validate
+  if (!user) throw "User not found";
+  if (
+    userParam.email &&
+    user.email !== userParam.email &&
+    (await User.findOne({ email: userParam.email }))
+  ) {
+    throw 'Email "' + userParam.email + '" is already taken';
   }
 
   // copy userParam properties to user
