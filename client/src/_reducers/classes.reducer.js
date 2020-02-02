@@ -2,7 +2,6 @@ import { classConstants } from "../_constants";
 
 export function classes(state = {}, action) {
   switch (action.type) {
-    // START TEACHER
     case classConstants.GETALL_CLASSES_REQUEST:
       return {
         loading: true
