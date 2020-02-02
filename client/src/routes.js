@@ -96,7 +96,7 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/class",
+    path: "/class/:id",
     name: "Class",
     icon: "ni ni-building text-default",
     component: AdminClass,
