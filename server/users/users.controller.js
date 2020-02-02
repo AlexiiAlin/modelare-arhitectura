@@ -34,7 +34,7 @@ function register(req, res, next) {
 function createTeacher(req, res, next) {
   userService
     .createTeacher(req.body)
-    .then(() => res.json({}))
+    .then(user => res.json(user))
     .catch(err => next(err));
 }
 
