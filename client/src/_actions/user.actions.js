@@ -21,22 +21,6 @@ function login(email, password) {
     userService.login(email, password).then(
       user => {
         dispatch(success(user));
-        switch (user.role) {
-          case 3:
-            history.push("/admin/teachers");
-            window.location.reload();
-            break;
-          case 2:
-            history.push("/teacher/profile");
-            window.location.reload();
-            break;
-          case 1:
-            history.push("/student/profile");
-            window.location.reload();
-            break;
-          default:
-            break;
-        }
       },
       error => {
         dispatch(failure(error.toString()));
