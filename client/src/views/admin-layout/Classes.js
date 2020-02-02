@@ -1,12 +1,11 @@
 import React from "react";
-
+import { connect } from "react-redux";
 // reactstrap components
 import {
   Button,
   Card,
   CardHeader,
   CardBody,
-  Table,
   Container,
   Row,
   Col,
@@ -15,9 +14,17 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import Table from "components/Tables/Classes.js";
 
-class Subjects extends React.Component {
+import { classActions } from "_actions";
+
+class Classes extends React.Component {
+  componentDidMount() {
+    this.props.getAllClasses();
+  }
   render() {
+    const { classes, alert } = this.props;
+    // const { user, submitted } = this.state;
     return (
       <>
         <Header />
@@ -31,59 +38,14 @@ class Subjects extends React.Component {
                     Here are the Classes in your school.
                   </h3>
                 </CardHeader>
-                <Table
-                  className="align-items-center table-dark table-flush"
-                  responsive
-                >
-                  <thead className="thead-dark">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Class Name</th>
-                      <th scope="col">No. Students</th>
-                      <th scope="col">No. Teachers</th>
-                      <th scope="col">No. Subjects</th>
-                      <th scope="col" className="text-right">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>8th grade</td>
-                      <td>1390 students</td>
-                      <td>15 teachers</td>
-                      <td>15 subjects</td>
-                      <td className="text-right">
-                        <a
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          className="text-white font-weight-bold h4"
-                        >
-                          Manage class
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>9th grade</td>
-                      <td>1391 students</td>
-                      <td>16 teachers</td>
-                      <td>17 subjects</td>
-                      <td className="text-right">
-                        <a
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          className="text-white font-weight-bold h4"
-                        >
-                          Manage class
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                <Table classes={(classes && classes.items) || []} />
                 <CardBody>
                   <Row>
+                    {alert.message && (
+                      <Col md="12">
+                        <Alert color={alert.type}>{alert.message}</Alert>
+                      </Col>
+                    )}
                     <Col md="6">
                       <FormGroup>
                         <Input
@@ -108,4 +70,17 @@ class Subjects extends React.Component {
   }
 }
 
-export default Subjects;
+function mapState(state) {
+  const { classes, alert } = state;
+  return { classes, alert };
+}
+
+const actionCreators = {
+  getAllClasses: classActions.getAllClasses
+};
+
+const connectedClasses = connect(
+  mapState,
+  actionCreators
+)(Classes);
+export default connectedClasses;
