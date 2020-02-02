@@ -77,7 +77,7 @@ class ClassDetails extends React.Component {
     );
   }
   render() {
-    console.log("here",this.props);
+    console.log("here", this.props);
     return (
       <>
         <Table className="align-items-center table-flush" responsive>

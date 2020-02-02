@@ -87,12 +87,13 @@ function addNewStudent(id, email) {
   return dispatch => {
     dispatch(request());
 
-    classService
-      .addNewStudent(id, email)
-      .then(
-        () => dispatch(success()),
-        error => {dispatch(failure(error.toString()));dispatch(alertActions.error(error.toString()));}
-      );
+    classService.addNewStudent(id, email).then(
+      () => dispatch(success()),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
   };
 
   function request() {
