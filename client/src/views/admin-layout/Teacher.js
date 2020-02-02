@@ -37,8 +37,12 @@ class Teacher extends React.Component {
     };
   }
   componentDidMount() {
-    let pathName = history.location.pathname.split("/");
+    let pathName = window.location.href.split("/");
     let teacherId = pathName[pathName.length - 1];
+    if (/\d/.test(teacherId)) {
+    } else {
+      window.location.reload();
+    }
     this.props.getTeacher(teacherId);
   }
   componentWillUnmount() {
