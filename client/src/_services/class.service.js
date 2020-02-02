@@ -3,7 +3,8 @@ import { authHeader } from "../_helpers";
 
 export const classService = {
   getAllClasses,
-  createClass
+  createClass,
+  getClass
 };
 
 function getAllClasses() {
@@ -23,6 +24,17 @@ function createClass(classObj) {
   };
   console.log(requestOptions);
   return fetch(`${config.apiUrl}/classes`, requestOptions).then(handleResponse);
+}
+
+function getClass(id) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(`${config.apiUrl}/classes/${id}`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function handleResponse(response) {

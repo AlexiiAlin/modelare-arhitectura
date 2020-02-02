@@ -27,6 +27,18 @@ export function classes(state = {}, action) {
       };
     case classConstants.CREATE_CLASS_FAILURE:
       return state;
+    case classConstants.GET_CLASS_REQUEST:
+      return {
+        loading: true
+      };
+    case classConstants.GET_CLASS_SUCCESS:
+      return {
+        classObj: action.classObj
+      };
+    case classConstants.GET_CLASS_FAILURE:
+      return {
+        error: action.error
+      };
     default:
       return state;
   }

@@ -6,7 +6,8 @@ const Class = db.Class;
 
 module.exports = {
   getAllClasses,
-  createClass
+  createClass,
+  getClass
 };
 
 async function getAllClasses() {
@@ -34,5 +35,20 @@ async function createClass(classObj) {
 
   // save user
   await newClass.save();
+  return newClass;
+}
+
+async function getClass(id) {
+  const classObj = await Class.findById(id);
+  const newClass = {
+    name: classObj.name,
+    students: classObj.students.map((prop, key) => {
+      return {
+        id: prop._id,
+        firstName: prop.firstName,
+        lastName: prop.lastName
+      };
+    })
+  };
   return newClass;
 }

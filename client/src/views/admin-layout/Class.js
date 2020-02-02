@@ -38,7 +38,7 @@ class Class extends React.Component {
     } else {
       window.location.reload();
     }
-    // this.props.getClass(classId);
+    this.props.getClass(classId);
   }
   componentWillUnmount() {
     this.props.clearAlerts();
@@ -58,13 +58,12 @@ class Class extends React.Component {
 
     this.setState({ submitted: true });
     const { user } = this.state;
-    this.setState({ user: newUser });
     if (user.email) {
       this.props.addNewStudent(user);
     }
   };
   render() {
-    const { alert, students, classObj } = this.props;
+    const { alert, classObj } = this.props;
     const { user, submitted } = this.state;
     return (
       <>
@@ -80,12 +79,16 @@ class Class extends React.Component {
                 <CardHeader className="border-0">
                   <h3 className="mb-0">{classObj && classObj.name} students</h3>
                 </CardHeader>
-                <Table students={students || []} />
+                <Table students={(classObj && classObj.students) || []} />
                 <CardBody className="bg-secondary">
                   <Form onSubmit={this.handleSubmit}>
                     <Row>
                       <Col md="8">
-                        <FormGroup>
+                        <FormGroup
+                          className={
+                            submitted && !user.email ? "has-danger" : ""
+                          }
+                        >
                           <Input
                             className="form-control-alternative"
                             id="input-last-name"
@@ -113,8 +116,8 @@ class Class extends React.Component {
 
 function mapState(state) {
   const { alert } = state;
-  const { students, classObj } = state.classes;
-  return { alert };
+  const { classObj } = state.classes;
+  return { alert, classObj };
 }
 
 const actionCreators = {

@@ -5,7 +5,8 @@ import { history } from "../_helpers";
 
 export const classActions = {
   getAllClasses,
-  createClass
+  createClass,
+  getClass
 };
 
 function getAllClasses() {
@@ -55,5 +56,28 @@ function createClass(newClass) {
   }
   function failure(error) {
     return { type: classConstants.CREATE_CLASS_FAILURE, error };
+  }
+}
+
+function getClass(id) {
+  return dispatch => {
+    dispatch(request());
+
+    classService
+      .getClass(id)
+      .then(
+        classObj => dispatch(success(classObj)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: classConstants.GET_CLASS_REQUEST };
+  }
+  function success(classObj) {
+    return { type: classConstants.GET_CLASS_SUCCESS, classObj };
+  }
+  function failure(error) {
+    return { type: classConstants.GET_CLASS_FAILURE, error };
   }
 }
