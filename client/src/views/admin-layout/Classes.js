@@ -38,7 +38,7 @@ class Classes extends React.Component {
                     Here are the Classes in your school.
                   </h3>
                 </CardHeader>
-                <Table classes={(classes && classes.items) || []} />
+                <Table classes={classes.items} />
                 <CardBody>
                   <Row>
                     {alert.message && (
