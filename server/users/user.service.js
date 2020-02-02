@@ -9,6 +9,7 @@ module.exports = {
   getAll,
   getAllTeachers,
   createTeacher,
+  getTeacher,
   getById,
   create,
   update,
@@ -67,6 +68,10 @@ async function createTeacher(userParam) {
 
 async function getById(id) {
   return await User.findById(id).select("-hash");
+}
+
+async function getTeacher(id) {
+  return await User.findById(id);
 }
 
 async function create(userParam) {
