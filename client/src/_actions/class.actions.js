@@ -4,7 +4,8 @@ import { alertActions } from "./";
 import { history } from "../_helpers";
 
 export const classActions = {
-  getAllClasses
+  getAllClasses,
+  createClass
 };
 
 function getAllClasses() {
@@ -27,5 +28,34 @@ function getAllClasses() {
   }
   function failure(error) {
     return { type: classConstants.GETALL_CLASSES_FAILURE, error };
+  }
+}
+
+function createClass(newClass) {
+  return dispatch => {
+    dispatch(request(newClass));
+
+    classService.createClass(newClass).then(
+      newClass => {
+        dispatch(success());
+        history.push("/admin/class/" + newClass._id);
+        window.location.reload();
+        dispatch(alertActions.success("Class created successfully"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(newClass) {
+    return { type: classConstants.CREATE_CLASS_REQUEST, class: newClass };
+  }
+  function success(teacher) {
+    return { type: classConstants.CREATE_CLASS_SUCCESS, class: newClass };
+  }
+  function failure(error) {
+    return { type: classConstants.CREATE_CLASS_FAILURE, error };
   }
 }
