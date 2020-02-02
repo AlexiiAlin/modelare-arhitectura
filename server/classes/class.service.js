@@ -57,13 +57,13 @@ async function getClass(id) {
 }
 
 async function addNewStudent(id, userParam) {
-  let user = await User.findOne({ email: "student@student.com", role: 1 });
+  let user = await User.findOne({ email: userParam.email, role: 1 });
   if (!user) {
     throw 'Email "' + userParam.email + '" is not a valid stundent email';
   }
   const classObj = await Class.findById(id).populate("students");
   let students = classObj.students.filter(
-    item => item._id.toString === user._id.toString
+    item => item._id.toString !== user._id.toString
   );
   if (students.length !== 0) {
     throw 'Student with "' + userParam.email + '" allready registered here';
@@ -79,6 +79,12 @@ async function addNewStudent(id, userParam) {
   Object.assign(classObj, newClass);
 
   await classObj.save();
+
+  Object.assign(user, {
+    class: classObj
+  });
+
+  await user.save();
 
   return classObj;
 }

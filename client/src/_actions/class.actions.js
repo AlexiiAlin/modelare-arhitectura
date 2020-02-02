@@ -88,7 +88,7 @@ function addNewStudent(id, email) {
     dispatch(request());
 
     classService.addNewStudent(id, email).then(
-      () => dispatch(success()),
+      (classObj) => dispatch(success(classObj)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));
@@ -99,8 +99,8 @@ function addNewStudent(id, email) {
   function request() {
     return { type: classConstants.ADD_STUDENT_IN_CLASS_REQUEST };
   }
-  function success() {
-    return { type: classConstants.ADD_STUDENT_IN_CLASS_SUCCESS };
+  function success(classObj) {
+    return { type: classConstants.ADD_STUDENT_IN_CLASS_SUCCESS, classObj };
   }
   function failure(error) {
     return { type: classConstants.ADD_STUDENT_IN_CLASS_FAILURE };

@@ -32,7 +32,7 @@ function getClass(req, res, next) {
 function addNewStudent(req, res, next) {
   classService
     .addNewStudent(req.params.id, req.body)
-    .then(() => res.json({}))
+    .then(classObj => res.json(classObj))
     .catch(err => next(err));
 }
 

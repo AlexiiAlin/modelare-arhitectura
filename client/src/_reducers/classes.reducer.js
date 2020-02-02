@@ -45,7 +45,10 @@ export function classes(state = {}, action) {
         loading: true
       };
     case classConstants.ADD_STUDENT_IN_CLASS_SUCCESS:
-      return state;
+    console.log(action);
+      return {
+        classObj: action.classObj
+      };
     case classConstants.ADD_STUDENT_IN_CLASS_FAILURE:
       return {
         ...state,

@@ -24,6 +24,62 @@ function initializeDb(db) {
       firstName: "Manu",
       lastName: "Student",
       role: 1
+    }),
+    new User({
+      email: "student1@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student2@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student3@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student4@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student5@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student6@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student7@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
+    }),
+    new User({
+      email: "student8@student.com",
+      hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+      firstName: "Manu",
+      lastName: "Student",
+      role: 1
     })
   ];
   let classObj = new Class({
