@@ -94,15 +94,14 @@ function createTeacher(teacher) {
 
     userService.createTeacher(teacher).then(
       user => {
-        console.log("user");
-        // dispatch(success());
-        // history.push("/admin/teacher/:id");
-        // dispatch(alertActions.success("Teacher created successfully"));
+        dispatch(success());
+        history.push("/admin/teacher/" + user._id);
+        window.location.reload();
+        dispatch(alertActions.success("Teacher created successfully"));
       },
       error => {
-        console.log("error");
-        // dispatch(failure(error.toString()));
-        // dispatch(alertActions.error(error.toString()));
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
       }
     );
   };
