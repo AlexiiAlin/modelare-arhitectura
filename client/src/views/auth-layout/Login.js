@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { history } from "_helpers";
@@ -53,8 +53,20 @@ class Login extends React.Component {
     }
   }
   render() {
-    const { loggingIn, alert } = this.props;
+    const { loggingIn, alert, loggedIn, user } = this.props;
     const { email, password, submitted } = this.state;
+    if (loggedIn && user) {
+      switch (user.role) {
+        case 3:
+          return <Redirect to="/admin/teachers" />;
+        case 2:
+          return <Redirect to="/teacher/profile" />;
+        case 1:
+          return <Redirect to="/student/profile" />;
+        default:
+          break;
+      }
+    }
     return (
       <>
         <Col lg="5" md="7">
@@ -124,8 +136,8 @@ class Login extends React.Component {
 
 function mapState(state) {
   const { alert } = state;
-  const { loggingIn } = state.authentication;
-  return { loggingIn, alert };
+  const { loggingIn, loggedIn, user } = state.authentication;
+  return { loggingIn, alert, user, loggedIn };
 }
 
 const actionCreators = {
