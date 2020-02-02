@@ -3,11 +3,13 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
 const Class = db.Class;
+const User = db.User;
 
 module.exports = {
   getAllClasses,
   createClass,
-  getClass
+  getClass,
+  addNewStudent
 };
 
 async function getAllClasses() {
@@ -39,7 +41,7 @@ async function createClass(classObj) {
 }
 
 async function getClass(id) {
-  const classObj = await Class.findById(id);
+  const classObj = await Class.findById(id).populate("students");
   const newClass = {
     name: classObj.name,
     id: classObj._id,
@@ -52,4 +54,29 @@ async function getClass(id) {
     })
   };
   return newClass;
+}
+
+async function addNewStudent(id, userParam){
+  let user = await User.findOne({email: "student@student.com", role: 1});
+  if(!user){
+    throw 'Email "' + userParam.email + '" is not a valid stundent email';
+  }
+  const classObj = await Class.findById(id).populate("students");
+  let students = classObj.students.filter(item => item._id.toString === user._id.toString);
+  if(students.length !== 0){
+    throw 'Student with "' + userParam.email + '" allready registered here';
+  }
+  students = classObj.students.concat([user]);
+  let newClass = {
+    name: classObj.name,
+    students: students,
+    teachers: classObj.teachers,
+    classSubjects: classObj.classSubjects
+  }
+  // copy userParam properties to user
+  Object.assign(classObj, newClass);
+
+  await classObj.save();
+
+  return classObj;
 }

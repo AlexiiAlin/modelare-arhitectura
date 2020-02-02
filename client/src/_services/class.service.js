@@ -4,7 +4,8 @@ import { authHeader } from "../_helpers";
 export const classService = {
   getAllClasses,
   createClass,
-  getClass
+  getClass,
+  addNewStudent
 };
 
 function getAllClasses() {
@@ -30,6 +31,18 @@ function getClass(id) {
   const requestOptions = {
     method: "GET",
     headers: authHeader()
+  };
+
+  return fetch(`${config.apiUrl}/classes/${id}`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function addNewStudent(id, email) {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify({ email: email })
   };
 
   return fetch(`${config.apiUrl}/classes/${id}`, requestOptions).then(

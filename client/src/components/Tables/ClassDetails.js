@@ -13,7 +13,10 @@ import {
   Container,
   Row,
   Col,
-  Table
+  Table,
+  Pagination,
+  PaginationItem,
+  PaginationLink
 } from "reactstrap";
 // core components
 
@@ -34,6 +37,7 @@ class ClassDetails extends React.Component {
         }
         return (
           <tr key={key}>
+            <td>{key + 1}</td>
             <td>
               {prop.firstName} {prop.lastName}
             </td>
@@ -73,6 +77,7 @@ class ClassDetails extends React.Component {
     );
   }
   render() {
+    console.log("here",this.props);
     return (
       <>
         <Table className="align-items-center table-flush" responsive>

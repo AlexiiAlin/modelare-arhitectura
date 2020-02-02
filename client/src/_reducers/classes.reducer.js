@@ -39,6 +39,16 @@ export function classes(state = {}, action) {
       return {
         error: action.error
       };
+    case classConstants.ADD_STUDENT_IN_CLASS_REQUEST:
+      return {
+        loading: true
+      };
+    case classConstants.ADD_STUDENT_IN_CLASS_SUCCESS:
+      return state;
+    case classConstants.ADD_STUDENT_IN_CLASS_FAILURE:
+      return {
+        error: action.error
+      };
     default:
       return state;
   }

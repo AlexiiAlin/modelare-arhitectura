@@ -6,6 +6,7 @@ const classService = require("./class.service");
 router.get("/", getAllClasses);
 router.post("/", createClass);
 router.get("/:id", getClass);
+router.put("/:id", addNewStudent);
 
 function getAllClasses(req, res, next) {
   classService
@@ -25,6 +26,13 @@ function getClass(req, res, next) {
   classService
     .getClass(req.params.id)
     .then(classObj => (classObj ? res.json(classObj) : res.sendStatus(404)))
+    .catch(err => next(err));
+}
+
+function addNewStudent(req, res, next) {
+  classService
+    .addNewStudent(req.params.id, req.body)
+    .then(() => res.json({}))
     .catch(err => next(err));
 }
 

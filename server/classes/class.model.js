@@ -6,7 +6,8 @@ const schema = new Schema({
   students: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
+      unique: true
     }
   ],
   teachers: [

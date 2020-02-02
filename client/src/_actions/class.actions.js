@@ -6,7 +6,8 @@ import { history } from "../_helpers";
 export const classActions = {
   getAllClasses,
   createClass,
-  getClass
+  getClass,
+  addNewStudent
 };
 
 function getAllClasses() {
@@ -79,5 +80,28 @@ function getClass(id) {
   }
   function failure(error) {
     return { type: classConstants.GET_CLASS_FAILURE, error };
+  }
+}
+
+function addNewStudent(id, email) {
+  return dispatch => {
+    dispatch(request());
+
+    classService
+      .addNewStudent(id, email)
+      .then(
+        () => dispatch(success()),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: classConstants.ADD_STUDENT_IN_CLASS_REQUEST };
+  }
+  function success() {
+    return { type: classConstants.ADD_STUDENT_IN_CLASS_SUCCESS };
+  }
+  function failure(error) {
+    return { type: classConstants.ADD_STUDENT_IN_CLASS_FAILURE };
   }
 }

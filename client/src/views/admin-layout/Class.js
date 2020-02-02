@@ -12,11 +12,12 @@ import {
   Form,
   Container,
   Row,
-  Col,
-  Table
+  Col
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+
+import Table from "components/Tables/ClassDetails.js";
 
 import { classActions, alertActions } from "_actions";
 
@@ -59,12 +60,13 @@ class Class extends React.Component {
     this.setState({ submitted: true });
     const { user } = this.state;
     if (user.email) {
-      this.props.addNewStudent(user);
+      this.props.addNewStudent(this.props.classObj.id, user.email);
     }
   };
   render() {
     const { alert, classObj } = this.props;
     const { user, submitted } = this.state;
+    console.log(classObj);
     return (
       <>
         <Header />
@@ -79,7 +81,7 @@ class Class extends React.Component {
                 <CardHeader className="border-0">
                   <h3 className="mb-0">{classObj && classObj.name} students</h3>
                 </CardHeader>
-                <Table students={(classObj && classObj.students) || []} />
+                <Table students={classObj && classObj.students} />
                 <CardBody className="bg-secondary">
                   <Form onSubmit={this.handleSubmit}>
                     <Row>
@@ -95,7 +97,7 @@ class Class extends React.Component {
                             placeholder="Email of student"
                             type="email"
                             name="email"
-                            onChange={this.onChange}
+                            onChange={this.handleChange}
                           />
                         </FormGroup>
                       </Col>
