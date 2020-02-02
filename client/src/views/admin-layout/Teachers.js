@@ -34,6 +34,7 @@ class Teachers extends React.Component {
   }
   componentDidMount() {
     this.props.getAllTeachers();
+    this.props.clearAlerts();
   }
 
   handleChange = event => {
@@ -156,7 +157,8 @@ function mapState(state) {
 
 const actionCreators = {
   getAllTeachers: userActions.getAllTeachers,
-  createTeacher: userActions.createTeacher
+  createTeacher: userActions.createTeacher,
+  clearAlerts: alertActions.clear
 };
 
 const connectedTeachers = connect(
