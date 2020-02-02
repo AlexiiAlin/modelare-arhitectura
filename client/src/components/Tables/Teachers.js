@@ -44,7 +44,7 @@ class Teachers extends React.Component {
               {prop.noClasses !== 1 ? "es" : ""}
             </td>
             <td className="text-right">
-              <Link to={"/admin/teacher/" + prop._id}>
+              <Link to={"/admin/teacher/" + prop.id}>
                 <Button color="default">Edit Teacher</Button>
               </Link>
             </td>
