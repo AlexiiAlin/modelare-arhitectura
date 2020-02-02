@@ -44,7 +44,10 @@ function initializeDb(db) {
     users.forEach((user, i) => {
       User.create(user, function(err, doc) {
         if (err) {
-          return console.error(err);
+          if (err.code === 11000) {
+          } else {
+            return console.error(err);
+          }
         }
         console.log("Initializing db : User successfully added!");
       });
@@ -53,7 +56,10 @@ function initializeDb(db) {
     console.log("Initializing db : Add Class");
     Class.create(classObj, function(err, doc) {
       if (err) {
-        return console.error(err);
+        if (err.code === 11000) {
+        } else {
+          return console.error(err);
+        }
       }
       console.log("Initializing db : Class successfully added!");
     });
@@ -61,7 +67,10 @@ function initializeDb(db) {
     console.log("Initializing db : Add Subject");
     Subject.create(subject, function(err, doc) {
       if (err) {
-        return console.error(err);
+        if (err.code === 11000) {
+        } else {
+          return console.error(err);
+        }
       }
       console.log("Initializing db : Subject successfully added!");
     });
@@ -73,7 +82,10 @@ function initializeDb(db) {
     console.log("Initializing db : Add ClassSubject");
     ClassSubject.create(classSubject, function(err, doc) {
       if (err) {
-        return console.error(err);
+        if (err.code === 11000) {
+        } else {
+          return console.error(err);
+        }
       }
       console.log("Initializing db : ClassSubject successfully added!");
     });
@@ -81,7 +93,10 @@ function initializeDb(db) {
     console.log("Initializing db : Add Grade");
     Grade.create(grade, function(err, doc) {
       if (err) {
-        return console.error(err);
+        if (err.code === 11000) {
+        } else {
+          return console.error(err);
+        }
       }
       console.log("Initializing db : Grade successfully added!");
     });
