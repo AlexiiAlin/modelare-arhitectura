@@ -35,6 +35,20 @@ export function users(state = {}, action) {
       return {
         error: action.error
       };
+    case userConstants.UPDATE_TEACHER_REQUEST:
+      return {
+        ...state,
+        updating: true
+      };
+    case userConstants.UPDATE_TEACHER_SUCCESS:
+      return {
+        teacher: action.teacher
+      };
+    case userConstants.UPDATE_TEACHER_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
     // STOP TEACHER
     // START STUDENT
     case userConstants.GETALL_STUDENTS_REQUEST:
