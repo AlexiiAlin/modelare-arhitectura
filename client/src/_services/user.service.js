@@ -7,6 +7,7 @@ export const userService = {
   getAllTeachers,
   getTeacher,
   createTeacher,
+  updateTeacher,
   getById,
   update,
   delete: _delete
@@ -100,6 +101,18 @@ function createTeacher(user) {
   return fetch(`${config.apiUrl}/users/teachers`, requestOptions).then(
     handleResponse
   );
+}
+
+function updateTeacher(user) {
+  const requestOptions = {
+    method: "PUT",
+    headers: { ...authHeader(), "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  };
+  return fetch(
+    `${config.apiUrl}/users/teacher/${user.id}`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function update(user) {
