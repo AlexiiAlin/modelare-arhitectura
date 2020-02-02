@@ -18,7 +18,7 @@ import {
 import Header from "components/Headers/Header.js";
 import Table from "components/Tables/Classes.js";
 
-import { classActions } from "_actions";
+import { classActions, alertActions } from "_actions";
 
 class Classes extends React.Component {
   constructor(props) {
@@ -32,6 +32,7 @@ class Classes extends React.Component {
   }
   componentDidMount() {
     this.props.getAllClasses();
+    this.props.clearAlerts();
   }
   handleChange = event => {
     const { name, value } = event.target;
@@ -117,7 +118,8 @@ function mapState(state) {
 
 const actionCreators = {
   getAllClasses: classActions.getAllClasses,
-  createClass: classActions.createClass
+  createClass: classActions.createClass,
+  clearAlerts: alertActions.clear
 };
 
 const connectedClasses = connect(
