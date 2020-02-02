@@ -2,7 +2,8 @@ import config from "config";
 import { authHeader } from "../_helpers";
 
 export const classService = {
-  getAllClasses
+  getAllClasses,
+  createClass
 };
 
 function getAllClasses() {
@@ -11,6 +12,16 @@ function getAllClasses() {
     headers: authHeader()
   };
 
+  return fetch(`${config.apiUrl}/classes`, requestOptions).then(handleResponse);
+}
+
+function createClass(classObj) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify(classObj)
+  };
+  console.log(requestOptions);
   return fetch(`${config.apiUrl}/classes`, requestOptions).then(handleResponse);
 }
 
