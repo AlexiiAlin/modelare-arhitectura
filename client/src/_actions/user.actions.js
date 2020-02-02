@@ -9,6 +9,7 @@ export const userActions = {
   getAllTeachers,
   createTeacher,
   getTeacher,
+  updateTeacher,
   getAllStudents,
   delete: _delete
 };
@@ -86,6 +87,33 @@ function createTeacher(teacher) {
   }
   function failure(error) {
     return { type: userConstants.CREATE_TEACHER_FAILURE, error };
+  }
+}
+
+function updateTeacher(teacher) {
+  return dispatch => {
+    dispatch(request(teacher));
+
+    userService.updateTeacher(teacher).then(
+      user => {
+        dispatch(success());
+        dispatch(alertActions.success("Teacher updated successfully"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(teacher) {
+    return { type: userConstants.UPDATE_TEACHER_REQUEST, teacher };
+  }
+  function success(teacher) {
+    return { type: userConstants.UPDATE_TEACHER_SUCCESS, teacher };
+  }
+  function failure(error) {
+    return { type: userConstants.UPDATE_TEACHER_FAILURE, error };
   }
 }
 
