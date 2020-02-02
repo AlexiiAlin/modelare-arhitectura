@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 // reactstrap components
 import {
+  Alert,
   Button,
   Card,
   CardHeader,
@@ -17,7 +18,7 @@ import {
 import Header from "components/Headers/Header.js";
 import Table from "components/Tables/Teachers.js";
 
-import { userActions } from "_actions";
+import { userActions, alertActions } from "_actions";
 
 class Teachers extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class Teachers extends React.Component {
     }
   };
   render() {
-    const { users, registering } = this.props;
+    const { users, registering, alert } = this.props;
     const { user, submitted } = this.state;
     return (
       <>
@@ -74,6 +75,11 @@ class Teachers extends React.Component {
                 <CardBody className="bg-secondary">
                   <Form onSubmit={this.handleSubmit}>
                     <Row>
+                      <Col md="12">
+                        {alert.message && (
+                          <Alert color={alert.type}>{alert.message}</Alert>
+                        )}
+                      </Col>
                       <Col md="4">
                         <FormGroup
                           className={
@@ -143,9 +149,9 @@ class Teachers extends React.Component {
 }
 
 function mapState(state) {
-  const { users } = state;
+  const { users, alert } = state;
   const { registering } = state.users;
-  return { users, registering };
+  return { users, registering, alert };
 }
 
 const actionCreators = {
