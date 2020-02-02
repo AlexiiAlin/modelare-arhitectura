@@ -32,7 +32,17 @@ async function getAll() {
 }
 
 async function getAllTeachers() {
-  return await User.find({ role: 2 });
+  let users = await User.find({ role: 2 });
+  users = users.map(prop => {
+    let newProp = {
+      noClasses: prop.classSubjects.length,
+      firstName: prop.firstName,
+      lastName: prop.lastName,
+      id: prop._id
+    };
+    return newProp;
+  });
+  return users;
 }
 
 async function createTeacher(userParam) {
