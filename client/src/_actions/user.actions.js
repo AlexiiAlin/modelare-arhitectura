@@ -6,9 +6,9 @@ import { history } from "../_helpers";
 export const userActions = {
   login,
   logout,
-  getAll,
   getAllTeachers,
   createTeacher,
+  getTeacher,
   getAllStudents,
   delete: _delete
 };
@@ -60,34 +60,6 @@ function logout() {
   return { type: userConstants.LOGOUT };
 }
 
-function register(user) {
-  return dispatch => {
-    dispatch(request(user));
-
-    userService.register(user).then(
-      user => {
-        dispatch(success());
-        history.push("/login");
-        dispatch(alertActions.success("Registration successful"));
-      },
-      error => {
-        dispatch(failure(error.toString()));
-        dispatch(alertActions.error(error.toString()));
-      }
-    );
-  };
-
-  function request(user) {
-    return { type: userConstants.REGISTER_REQUEST, user };
-  }
-  function success(user) {
-    return { type: userConstants.REGISTER_SUCCESS, user };
-  }
-  function failure(error) {
-    return { type: userConstants.REGISTER_FAILURE, error };
-  }
-}
-
 function createTeacher(teacher) {
   return dispatch => {
     dispatch(request(teacher));
@@ -117,29 +89,6 @@ function createTeacher(teacher) {
   }
 }
 
-function getAll() {
-  return dispatch => {
-    dispatch(request());
-
-    userService
-      .getAll()
-      .then(
-        users => dispatch(success(users)),
-        error => dispatch(failure(error.toString()))
-      );
-  };
-
-  function request() {
-    return { type: userConstants.GETALL_REQUEST };
-  }
-  function success(users) {
-    return { type: userConstants.GETALL_SUCCESS, users };
-  }
-  function failure(error) {
-    return { type: userConstants.GETALL_FAILURE, error };
-  }
-}
-
 function getAllTeachers() {
   return dispatch => {
     dispatch(request());
@@ -160,6 +109,29 @@ function getAllTeachers() {
   }
   function failure(error) {
     return { type: userConstants.GETALL_TEACHERS_FAILURE, error };
+  }
+}
+
+function getTeacher(id) {
+  return dispatch => {
+    dispatch(request());
+
+    userService
+      .getTeacher(id)
+      .then(
+        teacher => dispatch(success(teacher)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: userConstants.GET_TEACHER_REQUEST };
+  }
+  function success(teacher) {
+    return { type: userConstants.GET_TEACHER_SUCCESS, teacher };
+  }
+  function failure(error) {
+    return { type: userConstants.GET_TEACHER_FAILURE, error };
   }
 }
 
