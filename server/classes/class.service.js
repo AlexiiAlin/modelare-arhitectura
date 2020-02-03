@@ -61,30 +61,9 @@ async function addNewStudent(id, userParam) {
   if (!user) {
     throw 'Email "' + userParam.email + '" is not a valid stundent email';
   }
-  const classObj = await Class.findById(id).populate("students");
-  let students = classObj.students.filter(
-    item => item._id.toString !== user._id.toString
-  );
-  if (students.length !== 0) {
-    throw 'Student with "' + userParam.email + '" allready registered here';
-  }
-  students = classObj.students.concat([user]);
-  let newClass = {
-    name: classObj.name,
-    students: students,
-    teachers: classObj.teachers,
-    classSubjects: classObj.classSubjects
-  };
-  // copy userParam properties to user
-  Object.assign(classObj, newClass);
+  const classObj = await Class.findById(id);
+  await Class.update({_id: classObj._id}, {$addToSet: {students: user}})
+  await User.update({_id: user._id}, {class: classObj});
 
-  await classObj.save();
-
-  Object.assign(user, {
-    class: classObj
-  });
-
-  await user.save();
-
-  return classObj;
+  return getClass(id);
 }
