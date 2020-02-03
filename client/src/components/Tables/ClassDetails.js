@@ -42,7 +42,7 @@ class ClassDetails extends React.Component {
               {prop.firstName} {prop.lastName}
             </td>
             <td className="text-right">
-              <Button color="danger" size="sm">
+              <Button color="danger" size="sm" onClick={() => this.props.removeStudent(prop.id)}>
                 Delete
               </Button>
             </td>

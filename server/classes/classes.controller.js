@@ -7,6 +7,7 @@ router.get("/", getAllClasses);
 router.post("/", createClass);
 router.get("/:id", getClass);
 router.put("/:id", addNewStudent);
+router.delete("/:id", removeStudent);
 
 function getAllClasses(req, res, next) {
   classService
@@ -32,6 +33,13 @@ function getClass(req, res, next) {
 function addNewStudent(req, res, next) {
   classService
     .addNewStudent(req.params.id, req.body)
+    .then(classObj => res.json(classObj))
+    .catch(err => next(err));
+}
+
+function removeStudent(req, res, next) {
+  classService
+    .removeStudent(req.params.id, req.body)
     .then(classObj => res.json(classObj))
     .catch(err => next(err));
 }

@@ -5,7 +5,8 @@ export const classService = {
   getAllClasses,
   createClass,
   getClass,
-  addNewStudent
+  addNewStudent,
+  removeStudent
 };
 
 function getAllClasses() {
@@ -43,6 +44,18 @@ function addNewStudent(id, email) {
     method: "PUT",
     headers: { "Content-Type": "application/json", ...authHeader() },
     body: JSON.stringify({ email: email })
+  };
+
+  return fetch(`${config.apiUrl}/classes/${id}`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function removeStudent(id, userId) {
+  const requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify({ userId: userId })
   };
 
   return fetch(`${config.apiUrl}/classes/${id}`, requestOptions).then(

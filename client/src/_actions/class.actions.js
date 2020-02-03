@@ -7,7 +7,8 @@ export const classActions = {
   getAllClasses,
   createClass,
   getClass,
-  addNewStudent
+  addNewStudent,
+  removeStudent
 };
 
 function getAllClasses() {
@@ -104,5 +105,29 @@ function addNewStudent(id, email) {
   }
   function failure(error) {
     return { type: classConstants.ADD_STUDENT_IN_CLASS_FAILURE };
+  }
+}
+
+function removeStudent(id, userId) {
+  return dispatch => {
+    dispatch(request());
+
+    classService.removeStudent(id, userId).then(
+      (classObj) => dispatch(success(classObj)),
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() {
+    return { type: classConstants.REMOVE_STUDENT_IN_CLASS_REQUEST };
+  }
+  function success(classObj) {
+    return { type: classConstants.REMOVE_STUDENT_IN_CLASS_SUCCESS, classObj };
+  }
+  function failure(error) {
+    return { type: classConstants.REMOVE_STUDENT_IN_CLASS_FAILURE };
   }
 }
