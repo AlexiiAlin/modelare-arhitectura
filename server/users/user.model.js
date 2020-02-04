@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
@@ -7,7 +7,19 @@ const schema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   role: { type: String, enum: ["admin", "teacher", "student"] },
-  createdDate: { type: Date, default: Date.now }
+  createdDate: { type: Date, default: Date.now, required: true },
+  class: { // student-related
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Class'
+  },
+  grades: [{ // student-related
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Grade'
+  }],
+  classSubjects: [{ // teacher-related
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ClassSubject'
+  }]
 });
 
 schema.set("toJSON", { virtuals: true });
