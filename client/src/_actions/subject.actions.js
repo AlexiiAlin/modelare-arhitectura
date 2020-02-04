@@ -2,7 +2,7 @@ import { subjectConstants } from "../_constants";
 import { subjectService } from "../_services";
 import { alertActions } from "./";
 
-export const classActions = {
+export const subjectActions = {
   getAllSubjects,
   createSubject,
   getSubject,
