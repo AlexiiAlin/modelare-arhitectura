@@ -89,7 +89,7 @@ function addNewStudent(id, email) {
     dispatch(request());
 
     classService.addNewStudent(id, email).then(
-      (classObj) => dispatch(success(classObj)),
+      classObj => dispatch(success(classObj)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));
@@ -113,7 +113,7 @@ function removeStudent(id, userId) {
     dispatch(request());
 
     classService.removeStudent(id, userId).then(
-      (classObj) => dispatch(success(classObj)),
+      classObj => dispatch(success(classObj)),
       error => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));

@@ -64,8 +64,8 @@ class Class extends React.Component {
     }
   };
   removeStudent = userId => {
-    this.props.removeStudent(this.props.classObj.id,userId)
-  }
+    this.props.removeStudent(this.props.classObj.id, userId);
+  };
   render() {
     const { alert, classObj } = this.props;
     const { user, submitted } = this.state;
@@ -84,7 +84,10 @@ class Class extends React.Component {
                 <CardHeader className="border-0">
                   <h3 className="mb-0">{classObj && classObj.name} students</h3>
                 </CardHeader>
-                <Table students={classObj && classObj.students} removeStudent={this.removeStudent}/>
+                <Table
+                  students={classObj && classObj.students}
+                  removeStudent={this.removeStudent}
+                />
                 <CardBody className="bg-secondary">
                   <Form onSubmit={this.handleSubmit}>
                     <Row>

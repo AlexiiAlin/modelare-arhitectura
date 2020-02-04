@@ -53,20 +53,20 @@ export function classes(state = {}, action) {
         ...state,
         error: action.error
       };
-      case classConstants.REMOVE_STUDENT_IN_CLASS_REQUEST:
-        return {
-          ...state,
-          loading: true
-        };
-      case classConstants.REMOVE_STUDENT_IN_CLASS_SUCCESS:
-        return {
-          classObj: action.classObj
-        };
-      case classConstants.REMOVE_STUDENT_IN_CLASS_FAILURE:
-        return {
-          ...state,
-          error: action.error
-        };
+    case classConstants.REMOVE_STUDENT_IN_CLASS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case classConstants.REMOVE_STUDENT_IN_CLASS_SUCCESS:
+      return {
+        classObj: action.classObj
+      };
+    case classConstants.REMOVE_STUDENT_IN_CLASS_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
     default:
       return state;
   }

@@ -41,7 +41,7 @@ class Teacher extends React.Component {
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
-            <Col md="6">
+            <Col md="12">
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <h3 className="mb-0">Chemistry is tought in these classes</h3>
@@ -97,17 +97,27 @@ class Teacher extends React.Component {
                 </Table>
                 <CardBody className="bg-secondary">
                   <Row>
-                    <Col md="6">
+                    <Col md="4">
                       <FormGroup>
                         <Input
                           className="form-control-alternative"
                           id="input-subject"
-                          placeholder="Class"
+                          placeholder="Class Name"
                           type="text"
                         />
                       </FormGroup>
                     </Col>
-                    <Col md="6">
+                    <Col md="4">
+                      <FormGroup>
+                        <Input
+                          className="form-control-alternative"
+                          id="input-subject"
+                          placeholder="Teacher Email"
+                          type="email"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md="4">
                       <Button color="primary">Add new Class</Button>
                     </Col>
                   </Row>

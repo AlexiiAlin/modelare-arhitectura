@@ -17,14 +17,10 @@ async function getAllSubjects() {
   let noStundents = 0;
   let classes = await subjects.classSubjects;
   await classes.forEach(async (item, i) => {
-    let class = await Class.find({_id: item._id})
+    // let class = await Class.find({_id: item._id})
   });
 
-
-
-  return {
-    
-  };
+  return {};
 }
 
 async function createSubject(subject) {
@@ -40,6 +36,4 @@ async function createSubject(subject) {
   return newSubject;
 }
 
-async function getSubject(id) {
-
-}
+async function getSubject(id) {}

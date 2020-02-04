@@ -63,17 +63,23 @@ async function addNewStudent(id, userParam) {
     throw 'Email "' + userParam.email + '" is not a valid stundent email';
   }
   const classObj = await Class.findById(id);
-  await Class.updateOne({_id: classObj._id}, {$addToSet: {students: user}})
-  await User.updateOne({_id: user._id}, {class: classObj});
+  await Class.updateOne(
+    { _id: classObj._id },
+    { $addToSet: { students: user } }
+  );
+  await User.updateOne({ _id: user._id }, { class: classObj });
 
   return getClass(id);
 }
 
 async function removeStudent(id, userParam) {
-  let user = await User.findOne({ _id: userParam.userId});
+  let user = await User.findOne({ _id: userParam.userId });
   const classObj = await Class.findById(id);
-  await Class.updateOne({_id: classObj._id}, {$pull: {students: user._id}})
-  await User.updateOne({_id: user._id}, {class: undefined});
+  await Class.updateOne(
+    { _id: classObj._id },
+    { $pull: { students: user._id } }
+  );
+  await User.updateOne({ _id: user._id }, { class: undefined });
 
   return getClass(id);
 }
