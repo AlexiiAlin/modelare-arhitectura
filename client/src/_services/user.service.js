@@ -7,10 +7,7 @@ export const userService = {
   getAllTeachers,
   getTeacher,
   createTeacher,
-  updateTeacher,
-  getById,
-  update,
-  delete: _delete
+  updateTeacher
 };
 
 function login(email, password) {
@@ -35,6 +32,7 @@ function logout() {
   localStorage.removeItem("user");
 }
 
+// TEACHERS START
 function getAllTeachers() {
   const requestOptions = {
     method: "GET",
@@ -53,40 +51,6 @@ function getTeacher(id) {
   };
 
   return fetch(`${config.apiUrl}/users/teacher/${id}`, requestOptions).then(
-    handleResponse
-  );
-}
-
-function getAllStudents() {
-  const requestOptions = {
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`${config.apiUrl}/users/students`, requestOptions).then(
-    handleResponse
-  );
-}
-
-function getById(id) {
-  const requestOptions = {
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
-    handleResponse
-  );
-}
-
-function register(user) {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user)
-  };
-
-  return fetch(`${config.apiUrl}/users/register`, requestOptions).then(
     handleResponse
   );
 }
@@ -114,30 +78,20 @@ function updateTeacher(user) {
     requestOptions
   ).then(handleResponse);
 }
+// TEACHERS STOP
 
-function update(user) {
+// STUDENTS START
+function getAllStudents() {
   const requestOptions = {
-    method: "PUT",
-    headers: { ...authHeader(), "Content-Type": "application/json" },
-    body: JSON.stringify(user)
-  };
-
-  return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(
-    handleResponse
-  );
-}
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-  const requestOptions = {
-    method: "DELETE",
+    method: "GET",
     headers: authHeader()
   };
 
-  return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
+  return fetch(`${config.apiUrl}/users/students`, requestOptions).then(
     handleResponse
   );
 }
+// STUDENTS STOP
 
 function handleResponse(response) {
   return response.text().then(text => {
