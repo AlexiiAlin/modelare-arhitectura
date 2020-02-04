@@ -5,18 +5,14 @@ import { Provider } from "react-redux";
 
 import { store } from "./_helpers";
 
-// setup fake backend
-// import { configureFakeBackend } from './_helpers';
-// configureFakeBackend();
+import "_assets/vendor/nucleo/css/nucleo.css";
+import "_assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
+import "_assets/scss/argon-dashboard-react.scss";
 
-import "assets/vendor/nucleo/css/nucleo.css";
-import "assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
-import "assets/scss/argon-dashboard-react.scss";
-
-import AdminLayout from "layouts/Admin";
-import TeacherLayout from "layouts/Teacher";
-import StudentLayout from "layouts/Student";
-import AuthLayout from "layouts/Auth";
+import AdminLayout from "_layouts/Admin";
+import TeacherLayout from "_layouts/Teacher";
+import StudentLayout from "_layouts/Student";
+import AuthLayout from "_layouts/Auth";
 
 render(
   <Provider store={store}>

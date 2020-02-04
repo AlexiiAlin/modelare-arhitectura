@@ -16,25 +16,25 @@
 
 */
 // auth layout
-import Login from "views/auth-layout/Login.js";
+import Login from "_views/auth-layout/Login.js";
 // admin layout
-import AdminTeachers from "views/admin-layout/Teachers.js";
-import AdminStudents from "views/admin-layout/Students.js";
-import AdminSubjects from "views/admin-layout/Subjects.js";
-import AdminClasses from "views/admin-layout/Classes.js";
-import AdminTeacher from "views/admin-layout/Teacher.js";
-import AdminStudent from "views/admin-layout/Student.js";
-import AdminSubject from "views/admin-layout/Subject.js";
-import AdminClass from "views/admin-layout/Class.js";
+import AdminTeachers from "_views/admin-layout/Teachers.js";
+import AdminStudents from "_views/admin-layout/Students.js";
+import AdminSubjects from "_views/admin-layout/Subjects.js";
+import AdminClasses from "_views/admin-layout/Classes.js";
+import AdminTeacher from "_views/admin-layout/Teacher.js";
+import AdminStudent from "_views/admin-layout/Student.js";
+import AdminSubject from "_views/admin-layout/Subject.js";
+import AdminClass from "_views/admin-layout/Class.js";
 // teacher layout
-import TeacherProfile from "views/teacher-layout/Profile.js";
-import TeacherSubjects from "views/teacher-layout/Subjects.js";
-import TeacherStudents from "views/teacher-layout/Students.js";
-import TeacherGrades from "views/teacher-layout/Grades.js";
+import TeacherProfile from "_views/teacher-layout/Profile.js";
+import TeacherSubjects from "_views/teacher-layout/Subjects.js";
+import TeacherStudents from "_views/teacher-layout/Students.js";
+import TeacherGrades from "_views/teacher-layout/Grades.js";
 // student layout
-import StudentProfile from "views/student-layout/Profile.js";
-import StudentSubjects from "views/student-layout/Subjects.js";
-import StudentGrades from "views/student-layout/Grades.js";
+import StudentProfile from "_views/student-layout/Profile.js";
+import StudentSubjects from "_views/student-layout/Subjects.js";
+import StudentGrades from "_views/student-layout/Grades.js";
 
 var routes = [
   // auth layout
