@@ -15,10 +15,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // use JWT auth to secure the api
-app.use(jwt());
+// app.use(jwt());
 
 // api routes
 app.use('/users', require('./users/users.controller'));
+app.use('/subjects', require('./subjects/subjects.controller'));
+app.use('/classes', require('./classes/classes.controller'));
+app.use('/class-subjects', require('./classSubject/classSubjects.controller'));
 app.use('/db-initializer', require('./db-initializer/db-initializer.controller'));
 
 // global error handler
@@ -28,14 +31,75 @@ app.use(errorHandler);
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;
 const server = app.listen(port, function () {
     console.log('Server listening on port ' + port);
-    //initializeDb();
+    // initializeStudentWithClassAndSubject();
+
 });
+
+function initializeStudentWithClassAndSubject() {
+    const { User, Class, ClassSubject, Grade, Subject } = dbEntities;
+    const classObj = new Class({
+        name: 'THIS 402 ' + Date.now()
+    });
+    const subject = new Subject({
+        name: 'THIS Math'
+    });
+
+    subject.save(err => {
+        if (err) {
+            if (err.code === 11000) {
+            } else {
+                throw err;
+            }
+        }
+    });
+
+    classObj.save(err => {
+        if (err) {
+            if (err.code === 11000) {
+            } else {
+                throw err;
+            }
+        }
+    });
+
+    const classSubject = new ClassSubject({
+        class: classObj,
+        subject
+    });
+
+
+    classSubject.save(err => {
+        if (err) {
+            if (err.code === 11000) {
+            } else {
+                throw err;
+            }
+        }
+    });
+
+    const user = new User({
+        email: "THIS-alin@test.com",
+        hash: "$2y$10$tAB3EsS.9fiRjll0.RmyM.y/wsq38a0yl8lJudxu4gv1Fm463kLVa",
+        firstName: "Alin",
+        lastName: "Alexii",
+        role: "student",
+        class: classObj
+    });
+    user.save(err => {
+        if (err) {
+            if (err.code === 11000) {
+            } else {
+                throw err;
+            }
+        }
+    });
+}
 
 function initializeDb() {
     console.log('Initializing db');
     const { User, Class, ClassSubject, Grade, Subject } = dbEntities;
     const user = new User({
-        username: 'Test' + Date.now(),
+        email: 'Test' + Date.now(),
         hash: 'test',
         firstName: 'test',
         lastName: 'test',

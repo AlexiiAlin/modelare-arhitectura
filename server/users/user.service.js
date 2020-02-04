@@ -3,15 +3,19 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const User = db.User;
+const Class = db.Class;
 
 module.exports = {
   authenticate,
-  getAll,
   getAllTeachers,
+  getAllStudents,
+  getClasses,
+  // ==========================================
   getById,
   create,
   update,
-  delete: _delete
+  delete: _delete,
+  getAll,
 };
 
 async function authenticate({ email, password }) {
@@ -26,13 +30,39 @@ async function authenticate({ email, password }) {
   }
 }
 
-async function getAll() {
-  return await User.find().select("-hash");
+async function getAllTeachers() {
+  return await User.find({ role: "teacher" }).populate('classSubjects');
+}
+async function getAllStudents() {
+  return await User.find({ role: "student" })
+      .populate({
+        path: 'class',
+        populate: {
+          path: 'classSubjects',
+        }
+      })
+      .populate({
+        path: 'grades',
+      });
 }
 
-async function getAllTeachers() {
-  return await User.find({ role: "teacher" });
+async function getClasses() {
+  return await Class.find()
+      .populate({
+        path: 'classSubjects',
+        populate: {
+          path: 'class'
+        }
+      })
+      .populate({
+        path: 'students',
+      })
+      .populate({
+        path: 'teachers',
+      })
 }
+
+// ==========================================
 
 async function getById(id) {
   return await User.findById(id).select("-hash");
@@ -80,4 +110,8 @@ async function update(id, userParam) {
 
 async function _delete(id) {
   await User.findByIdAndRemove(id);
+}
+
+async function getAll() {
+  return await User.find().select("-hash");
 }

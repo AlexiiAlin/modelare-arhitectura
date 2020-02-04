@@ -8,19 +8,18 @@ const schema = new Schema({
   lastName: { type: String, required: true },
   role: { type: String, enum: ["admin", "teacher", "student"] },
   createdDate: { type: Date, default: Date.now, required: true },
-    role: { type: Number, default: 0 }, // We'll consider: 0 = Unconfirmed, 1 = Student, 2 = Teacher, 3 = Admin
-    class: { // student-related
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Class'
-    },
-    grades: [{ // student-related
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Grade'
-    }],
-    classSubjects: [{ // teacher-related
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ClassSubject'
-    }]
+  class: { // student-related
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Class'
+  },
+  grades: [{ // student-related
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Grade'
+  }],
+  classSubjects: [{ // teacher-related
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ClassSubject'
+  }]
 });
 
 schema.set("toJSON", { virtuals: true });

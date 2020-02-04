@@ -4,9 +4,12 @@ const userService = require("./user.service");
 
 // routes
 router.post("/authenticate", authenticate);
+router.get("/teachers", getAllTeachers);
+router.get('/students', getAllStudents);
+router.get('/get-classes', getClasses);
+// ==========================================
 router.post("/register", register);
 router.get("/", getAll);
-router.get("/teachers", getAllTeachers);
 router.get("/current", getCurrent);
 router.get("/:id", getById);
 router.put("/:id", update);
@@ -23,6 +26,28 @@ function authenticate(req, res, next) {
     .catch(err => next(err));
 }
 
+function getAllTeachers(req, res, next) {
+  userService
+      .getAllTeachers()
+      .then(users => res.json(users))
+      .catch(err => next(err));
+}
+
+function getAllStudents(req, res, next) {
+  userService
+      .getAllStudents()
+      .then(users => res.json(users))
+      .catch(err => next(err));
+}
+function getClasses(req, res, next) {
+  userService
+      .getClasses()
+      .then(users => res.json(users))
+      .catch(err => next(err));
+}
+
+// ==========================================
+
 function register(req, res, next) {
   userService
     .create(req.body)
@@ -33,13 +58,6 @@ function register(req, res, next) {
 function getAll(req, res, next) {
   userService
     .getAll()
-    .then(users => res.json(users))
-    .catch(err => next(err));
-}
-
-function getAllTeachers(req, res, next) {
-  userService
-    .getAllTeachers()
     .then(users => res.json(users))
     .catch(err => next(err));
 }
