@@ -7,7 +7,9 @@ export const subjectActions = {
   createSubject,
   getSubject,
   addClassAndTeacher,
-  removeClassAndTeacher
+  removeClassAndTeacher,
+  getAllSubjectsStudent,
+  getAllSubjectsTeacher
 };
 
 function getAllSubjects() {
@@ -140,5 +142,51 @@ function removeClassAndTeacher(id, idClass, idTeacher) {
       type: subjectConstants.REMOVE_CLASS_AND_TEACHER_FROM_SUBJECT_FAILURE,
       error
     };
+  }
+}
+
+function getAllSubjectsStudent(idStudent) {
+  return dispatch => {
+    dispatch(request());
+
+    subjectService
+      .getAllSubjectsStudent(idStudent)
+      .then(
+        subjects => dispatch(success(subjects)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: subjectConstants.GETALL_STUDENT_SUBJECTS_REQUEST };
+  }
+  function success(subjects) {
+    return { type: subjectConstants.GETALL_STUDENT_SUBJECTS_SUCCESS, subjects };
+  }
+  function failure(error) {
+    return { type: subjectConstants.GETALL_STUDENT_SUBJECTS_FAILURE, error };
+  }
+}
+
+function getAllSubjectsTeacher(idTeacher) {
+  return dispatch => {
+    dispatch(request());
+
+    subjectService
+      .getAllSubjectsTeacher(idTeacher)
+      .then(
+        subjects => dispatch(success(subjects)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: subjectConstants.GETALL_TEACHER_SUBJECTS_REQUEST };
+  }
+  function success(subjects) {
+    return { type: subjectConstants.GETALL_TEACHER_SUBJECTS_SUCCESS, subjects };
+  }
+  function failure(error) {
+    return { type: subjectConstants.GETALL_TEACHER_SUBJECTS_FAILURE, error };
   }
 }

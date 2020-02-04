@@ -6,7 +6,9 @@ export const classService = {
   createSubject,
   getSubject,
   addClassAndTeacher,
-  removeClassAndTeacher
+  removeClassAndTeacher,
+  getAllSubjectsStudent,
+  getAllSubjectsTeacher
 };
 
 function getAllSubjects() {
@@ -65,6 +67,30 @@ function removeClassAndTeacher(id, idClass, idTeacher) {
   return fetch(`${config.apiUrl}/subjects/${id}`, requestOptions).then(
     handleResponse
   );
+}
+
+function getAllSubjectsStudent(idStudent) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(
+    `${config.apiUrl}/subjects/students/${idStudent}`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function getAllSubjectsTeacher(idTeacher) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(
+    `${config.apiUrl}/subjects/teachers/${idTeacher}`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function handleResponse(response) {
